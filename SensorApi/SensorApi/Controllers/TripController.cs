@@ -5,11 +5,19 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SensorApi.Models;
+using SensorApi.Services;
 
 namespace SensorApi.Controllers
 {
     public class TripController : ApiController
     {
+        private ITripService _tripService;
+
+        public TripController()
+        {
+            _tripService = new TripService();   
+        }
+
         // GET: api/Trip
         public IEnumerable<Trip> Get()
         {
