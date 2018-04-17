@@ -9,6 +9,7 @@ using SensorApi.Services;
 
 namespace SensorApi.Controllers
 {
+    [RoutePrefix("api/trip")]
     public class TripController : ApiController
     {
         private ITripService _tripService;
@@ -19,9 +20,19 @@ namespace SensorApi.Controllers
         }
 
         // GET: api/Trip
-        public IEnumerable<Trip> Get()
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult Get()
         {
-            return new List<Trip>();
+            try
+            {
+                 var trips = _tripService.GetAll();
+                return Ok(trips);
+            }
+            catch (Exception e){
+                return InternalServerError();
+            }
+            
         }
 
         // GET: api/Trip/5
@@ -31,8 +42,23 @@ namespace SensorApi.Controllers
         }
 
         // POST: api/Trip
-        public void Post([FromBody]Trip trip)
+        [HttpPost]
+        [Route("Post")]
+        public IHttpActionResult Post([FromBody]Trip trip)
         {
+            try
+            {
+                bool insertSuccess = _tripService.Add(trip);
+                if (!insertSuccess)
+                {
+                    return InternalServerError();
+                }
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Trip/5

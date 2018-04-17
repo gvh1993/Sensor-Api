@@ -12,11 +12,14 @@ namespace SensorApi.Models
         public DateTimeOffset BeginDateTimeOffset { get; set; }
         public DateTimeOffset EndDateTimeOffset { get; set; }
         public string TransportationMode { get; set; }
-        public Device Device { get; set; }
         public List<Gps> Gpses { get; set; }
         public List<Accelerometer> Accelerometers { get; set; }
         public List<Gyroscope> Gyroscopes { get; set; }
         public List<Magnetometer> Magnetometers { get; set; }
+        public List<LinearAcceleration> LinearAccelerations { get; set; }
+        public List<Gravity> Gravities { get; set; }
+        public List<Orientation> Orientations { get; set; }
+        public List<RotationVector> RotationVectors { get; set; }
         public List<MeasurementSession> MeasurementSessions { get; set; }
     }
 }
